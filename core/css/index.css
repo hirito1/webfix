@@ -1,0 +1,33 @@
+.navbar-default{
+	background-color: black;
+	border-color : transparent;
+	padding: 5px 10px;
+}
+
+.navbar-nav  {
+  border-top: transparent solid 1px; }
+.navbar-brand{
+	margin-top: -3px;
+}
+.btn-pink {
+  background-color: #f9e94e;
+  border-color: #f9e94e; 
+}
+#pinggiran{
+    position: absolute;
+    width: 25%;
+    height: 40%;
+    top:80%;
+}
+.ekstra {
+    margin-top: 100px;
+}
+
+.ekstra li{
+    list-style: none;
+    color: white;
+    background-color: royalblue;
+    padding: 5px;
+    margin: 0;
+    text-align: center;
+}
