@@ -2,20 +2,24 @@
 	session_start();
 	require_once("Api.php");
 	$api = new Api();
-
+if(isset($_SESSION['user_session'])){
 	$id = $_SESSION['user_session'];
 
 	$stmt = $api->runQuery("SELECT * FROM user WHERE id=:id");
 	$stmt->execute(array(":id"=>$id));
 	$userRow=$stmt->fetch(PDO::FETCH_ASSOC);
+}
+	$stmt = $api->runQuery("SELECT * FROM post");
+
+	
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>GoBLog</title>
 	<link rel="icon" type="image/png" href="assets/img/goblog.png">
-	<link rel="stylesheet" type="text/css" href="core/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="core/css/index.css">
+	<link rel="stylesheet" type="text/css" href="core/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="core/css/primer.css">
 	<script type="text/javascript" src="core/js/core.js"></script>
 	<script type="text/javascript" src="core/js/jquery-3.1.0.min.js"></script>
 	<script type="text/javascript" src="core/bootstrap/js/bootstrap.min.js"></script>
@@ -50,7 +54,7 @@
 </nav>
 
 <section class="site-head-full"> 
-	<img src="assets/img/fix1.jpg" width="100%" height="350px" style="position: absolute; margin-top: 1em; background-color: transparent;">
+	<img src="assets/img/fix1.jpg" width="100%" height="350px" style="position: absolute; margin-top: 3em; background-color: transparent;">
 	<div class="container">
 	<div class="row">
 		<div class="col-md-6" style="top: 100px; position: absolute; width: 550px;">
@@ -71,10 +75,51 @@
 	</div>
 	</div>
 </section>
-<section id="pinggiran">
-	<ul class="ekstra">
-		
-	</ul>
+<?php if(isset($_SESSION['user_session'])): ?>
+<section id="ngepost" >
+	<form class="signin-form" method="post" enctype="multipart/form-data" action="prcs.php?act=postingan">
+	<h2 style="margin-left: 6em;">Post Baru</h2>
+	<div id="error">
+					<?php if(isset($error)) { ?>
+					<div class="alert alert-danger">
+						<i class="glyphicon glyphicon-warning-sign"></i> &nbsp; <?php echo $error ?> !
+					</div>
+					<?php } ?>
+				</div>
+		<div class="form-group">
+			<label>Judul</label>
+			<input type="text" name="judul-post" class="form-control"  style="width: 400px;">
+		</div>
+		<div class="form-group">
+			<label>Isi Post</label>
+			<textarea class="form-control"  style="width: 500px; height: 200px;" name="isi-post"></textarea>
+		</div>
+		<div class="form-group">
+			<button type="submit" name="terbitkan" class="btn btn-primary">
+						<i class="glyphicon glyphicon-log-in"></i> &nbsp; Terbitkan
+			</button>
+		</div>
+	</form>
+</section>
+<?php endif ; ?>
+<section id="tampilkan">
+	<div class="container">
+		<?php
+		while($show=$stmt->fetch(PDO::FETCH_OBJ)){
+			echo "<div class=''>
+
+			</div>
+			";
+		};
+		?>
+	</div>
+</section>
+<section id="footer">
+	<div class="container">
+		<div class="panel-footer">
+			<p>Multimedia - 2017</p>
+		</div>
+	</div>
 </section>
 </body>
 </html>

@@ -50,18 +50,11 @@
   <!-- /#sidebar-wrapper -->
 
   <!-- Page Content -->
-  <div id="page-content-wrapper">
-    <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
-      <span class="hamb-top"></span>
-      <span class="hamb-middle"></span>
-      <span class="hamb-bottom"></span>
-    </button>
-    <div class="container">
+    <div class="container" style="margin-top: 10em;">
       <div class="row grey">
         <div class="col-lg-12 ">
           <h1>Dashboard</h1>
           <center><h2>Selamat Datang <?php echo $userRow['nama']; ?></h2></center>
-          
         </div>
       </div>
     </div>
